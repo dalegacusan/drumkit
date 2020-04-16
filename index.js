@@ -1,34 +1,31 @@
-const buttons = document.querySelectorAll('button');
-
 // Click Event
-buttons.forEach((currentButton) => {
-    currentButton.addEventListener('click', () => {
-        const currentKey = currentButton.innerHTML;
+const buttons = $('button');
 
-        determiner(currentKey);
+buttons.click(function (e) {
+    determiner(e.key);
 
-        addAnimation(currentKey);
-    });
+    addAnimation(e.key);
 });
 
-document.addEventListener('keydown', (event) => {
-    const currentKey = event.key;
 
-    determiner(currentKey);
+// KeyPress Event
+$(document).keydown((e) => {
+    determiner(e.key);
 
-    addAnimation(currentKey);
+    addAnimation(e.key);
 });
 
-// Add animation
+// Add Animation
 function addAnimation(buttonKey) {
-    const retrieveButton = document.querySelector(`.${buttonKey}`);
-    retrieveButton.classList.add('pressed');
+    const currButton = $(`.${buttonKey}`);
+    currButton.addClass('pressed');
 
     setTimeout(() => {
-        retrieveButton.classList.remove('pressed');
+        currButton.removeClass('pressed');
     }, 100);
 }
 
+// Determine Sound
 function determiner(key) {
     switch (key) {
         case 'w':
